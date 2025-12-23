@@ -1,26 +1,38 @@
 # -*- coding: utf-8 -*-
-import requests
 import http.client
 import json
+import payload_templates
 
-"""url = "http://172.17.0.1:8099/send_private_msg"
-payload = {
-    "user_id": 3525843539,
-    "message": "你好，NapCatQQ！"
-}"""
-#resp = requests.post(url, json=payload)
-#print(resp.json())
+def post_request(url_api,raw_payload,method:str = "POST"):
+    try:
+        payload = json.dumps(raw_payload)
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        conn.request(method, url_api, payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        print(data.decode("utf-8"))
+    except Exception as e:
+        print(e)
 
-
-
-conn = http.client.HTTPConnection("172.17.0.1",9099)
-payload = json.dumps({
-   "user_id": 3525843539,
-})
-headers = {
-   'Content-Type': 'application/json'
-}
-conn.request("POST", "/send_poke", payload, headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
+if __name__ == '__main__':
+    conn = http.client.HTTPConnection("172.17.0.1", 9099)
+    while True:
+        raw_input = input("选择功能【1.发送群聊消息】【2.发送私聊消息】:")
+        if raw_input == "1":
+            group_id = input("发送到群：")
+            msg = input(":")
+            payload = payload_templates.send_group_message(group_id, msg)
+            url_api = "/send_group_msg"
+            #
+            post_request(url_api,payload)
+        elif raw_input == "2":
+            group_id = input("发送到人：")
+            msg = input(":")
+            payload = payload_templates.send_private_message(group_id, msg)
+            url_api = "/send_private_msg"
+            #
+            post_request(url_api, payload)
+        else:
+            continue
