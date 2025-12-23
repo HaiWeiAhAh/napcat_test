@@ -13,7 +13,7 @@ payload = {
 
 
 
-conn = http.client.HTTPSConnection("172.17.0.1",9099)
+conn = http.client.HTTPConnection("172.17.0.1",9099)
 payload = json.dumps({
    "user_id": 3525843539,
 })
