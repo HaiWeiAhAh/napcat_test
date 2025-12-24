@@ -5,11 +5,11 @@ import payload_templates
 
 def post_request(url_api,raw_payload,method:str = "POST"):
     try:
-        payload = json.dumps(raw_payload)
+        init_payload = json.dumps(raw_payload)
         headers = {
             'Content-Type': 'application/json'
         }
-        conn.request(method, url_api, payload, headers)
+        conn.request(method, url_api, init_payload, headers)
         res = conn.getresponse()
         data = res.read()
         print(data.decode("utf-8"))
@@ -28,9 +28,9 @@ if __name__ == '__main__':
             #
             post_request(url_api,payload)
         elif raw_input == "2":
-            group_id = input("发送到人：")
+            private_id = input("发送到人：")
             msg = input(":")
-            payload = payload_templates.send_private_message(group_id, msg)
+            payload = payload_templates.send_private_message(private_id, msg)
             url_api = "/send_private_msg"
             #
             post_request(url_api, payload)
