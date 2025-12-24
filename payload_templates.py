@@ -3,21 +3,21 @@
 
 def send_group_message(group_id, message):
     payload = {
-   "group_id": {group_id},
+   "group_id": group_id,
    "message": [
       {
          "type": "text",
          "data": {
-            "text": f"{message}"
+            "text": message
          }
       }
    ]
 }
     return payload
 
-def send_private_message(group_id, message):
+def send_private_message(private_id, message):
     payload = {
-   "user_id": group_id,
+   "user_id": private_id,
    "message": [
       {
          "type": "text",
