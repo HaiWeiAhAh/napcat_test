@@ -28,3 +28,10 @@ def send_private_message(private_id, message):
    ]
 }
     return payload
+
+def set_group_whole_ban():
+    payload = {
+        "group_id": 0,
+        "enable": True
+    }
+    return payload
