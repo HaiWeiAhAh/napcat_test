@@ -7,7 +7,7 @@ import websockets as Server
 
 async def napcat_server():
     print("正在启动adapter...")
-    async with Server.serve(message_recv,"0.0.0.0",9099) as server:
+    async with Server.serve(message_recv,"0.0.0.0",9000) as server:
         print(
             f"Adapter已启动，监听地址: ws://0.0.0.0:9000"
         )
